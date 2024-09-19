@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Conseil vêtement pour la météo, nature de l'année, tarification des
+      billets
+    </title>
+  </head>
+  <body>
+    <p id="prixbillet"></p>
+    <p id="resultat"></p>
+    <p id="conseillervetementmeteo"></p>
+    <p id="fibonacci-result"></p>
+    <p id="puissance-result"></p>
+    <script>
+      // Fonction récursive pour générer le n-ième nombre de Fibonacci
+      function fibonacci(n) {
+        if (n <= 1) {
+          return n;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+      }
+
+      // Exemple d'utilisation
+      let n = 10; // Par exemple, pour obtenir le 10ème nombre de Fibonacci
+      let result = fibonacci(n);
+
+      // Afficher le résultat dans la page
+      document.getElementById(
+        "fibonacci-result"
+      ).innerHTML = `Le ${n}ème nombre de Fibonacci est : ${result}`;
+
+      // Fonction pour conseiller des vêtements selon la météo
+      function conseiller(meteo) {
+        if (meteo === "soleil") {
+          return "T-shirt et lunettes de soleil";
+        } else if (meteo === "pluie") {
+          return "Parapluie et bottes en caoutchouc";
+        } else if (meteo === "neige") {
+          return "Manteau d'hiver et bottes de neige";
+        } else {
+          return "Veuillez saisir une météo valide (soleil, pluie, neige).";
+        }
+      }
+
+      // Demander à l'utilisateur de saisir la météo
+      const meteo = prompt("Veuillez saisir la météo (soleil, pluie, neige) :");
+      if (meteo) {
+        const conseil = conseiller(meteo.toLowerCase());
+        document.getElementById(
+          "conseillervetementmeteo"
+        ).textContent = `Les vêtements conseillés pour la météo sont : ${conseil}`;
+      } else {
+        document.getElementById("conseillervetementmeteo").textContent =
+          "Aucune météo saisie.";
+      }
+
+      // Fonction pour vérifier si une année est bissextile
+      function anneeBissextile(annee) {
+        if (annee % 4 === 0) {
+          if (annee % 100 === 0) {
+            return annee % 400 === 0;
+          }
+          return true;
+        }
+        return false;
+      }
+
+      // Demander à l'utilisateur de saisir une année
+      const annee = parseInt(
+        prompt("Veuillez saisir une année :", "exemple : 2020")
+      );
+      // Vérifier si l'entrée est valide
+      if (!isNaN(annee) && annee >= 0) {
+        const bisextile = anneeBissextile(annee);
+        document.getElementById(
+          "resultat"
+        ).textContent = `L'année ${annee} est ${
+          bisextile ? "bisextile" : "non bisextile"
+        }.`;
+      } else {
+        document.getElementById("resultat").textContent =
+          "Veuillez saisir une année valide.";
+      }
+
+      // Fonction pour déterminer le prix du billet
+      function prixBillet(age) {
+        if (age <= 12) {
+          return 10; // Prix pour les enfants
+        } else if (age >= 13 && age <= 17) {
+          return 15; // Prix pour les adolescents
+        } else {
+          return 20; // Prix pour les adultes
+        }
+      }
+
+      // Demander à l'utilisateur de saisir son âge
+      const ageUtilisateur = parseInt(prompt("Veuillez saisir votre âge :"));
+      // Vérifier si l'entrée est valide
+      if (!isNaN(ageUtilisateur) && ageUtilisateur >= 0) {
+        const prix = prixBillet(ageUtilisateur);
+        document.getElementById(
+          "prixbillet"
+        ).textContent = `Le prix de votre billet de cinéma est : ${prix} $`;
+      } else {
+        document.getElementById("prixbillet").textContent =
+          "Veuillez saisir un âge valide.";
+      }
+
+      // Fonction récursive pour calculer la puissance d'un nombre
+      function puissance(base, exponent) {
+        if (exponent === 0) {
+          return 1;
+        }
+        return base * puissance(base, exponent - 1);
+      }
+
+      // Exemple d'utilisation
+      const base = parseInt(prompt("Veuillez saisir la base :"));
+      const exponent = parseInt(prompt("Veuillez saisir l'exposant :"));
+      if (!isNaN(base) && !isNaN(exponent)) {
+        const puissanceResult = puissance(base, exponent);
+        document.getElementById(
+          "puissance-result"
+        ).innerHTML = `${base} élevé à la puissance ${exponent} est : ${puissanceResult}`;
+      } else {
+        document.getElementById("puissance-result").textContent =
+          "Veuillez saisir des valeurs valides pour la base et l'exposant.";
+      }
+    </script>
+  </body>
+</html>
